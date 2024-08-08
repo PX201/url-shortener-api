@@ -1,9 +1,12 @@
 package com.lahmamsi.url_shortener_api;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
@@ -13,6 +16,7 @@ import jakarta.validation.constraints.NotNull;
 public class URLMapping {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column
 	private long id;
 
@@ -24,10 +28,11 @@ public class URLMapping {
 	private String shortUrl;
 
 	@Column
-	private LocalDateTime createdAt;
+	private LocalDate createdAt;
 
-	@Column
-	private LocalDateTime expirationdDate;
+	@Column(name = "expiration_date")
+	@NotNull
+	private LocalDate expirationdDate;
 
 	@Column
 	private long clickCount;
@@ -36,15 +41,15 @@ public class URLMapping {
 
 	}
 
-	public URLMapping(String originalUrl, String shortUrl, LocalDateTime createdAt, LocalDateTime expirationdDate) {
+	public URLMapping(String originalUrl, String shortUrl, LocalDate createdAt, LocalDate expirationdDate) {
 		this.originalUrl = originalUrl;
 		this.shortUrl = shortUrl;
 		this.createdAt = createdAt;
 		this.expirationdDate = expirationdDate;
 	}
 
-	public URLMapping(long id, String originalUrl, String shortUrl, LocalDateTime createdAt,
-			LocalDateTime expirationdDate, long clickCount) {
+	public URLMapping(long id, String originalUrl, String shortUrl, LocalDate createdAt,
+			LocalDate expirationdDate, long clickCount) {
 		super();
 		this.id = id;
 		this.originalUrl = originalUrl;
@@ -78,19 +83,19 @@ public class URLMapping {
 		this.shortUrl = shortUrl;
 	}
 
-	public LocalDateTime getCreatedAt() {
+	public LocalDate getCreatedAt() {
 		return createdAt;
 	}
 
-	public void setCreatedAt(LocalDateTime createdAt) {
+	public void setCreatedAt(LocalDate createdAt) {
 		this.createdAt = createdAt;
 	}
 
-	public LocalDateTime getExpirationdDate() {
+	public LocalDate getExpirationdDate() {
 		return expirationdDate;
 	}
 
-	public void setExpirationdDate(LocalDateTime expirationdDate) {
+	public void setExpirationdDate(LocalDate expirationdDate) {
 		this.expirationdDate = expirationdDate;
 	}
 

@@ -1,7 +1,7 @@
 package com.lahmamsi.url_shortener_api;
 
 import java.net.URI;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.Optional;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -21,8 +22,8 @@ public class APIController {
 	@Autowired
 	APIService service;
 
-	@PostMapping("c")
-	public ResponseEntity<URLMapping> shorten(URLReq urlreq, HttpServletRequest req) {
+	@PostMapping("")
+	public ResponseEntity<URLMapping> shorten(@RequestBody URLReq urlreq, HttpServletRequest req) {
 		
 		URLMapping urlMapping = service.createUrl(urlreq);
 		
@@ -30,12 +31,12 @@ public class APIController {
 
 	}
 
-	@GetMapping("r/{short_link}")
+	@GetMapping("r/{shortLink}")
 	public ResponseEntity<String> redirectToOriginURL(@PathVariable String shortLink) {
 		Optional<URLMapping> urlMappingOp = service.getURL(shortLink);
 		if(urlMappingOp.isPresent()) {
 			URLMapping urlMapping = urlMappingOp.get();
-			if(urlMapping.getOriginalUrl() != null && urlMapping.getExpirationdDate().isBefore(LocalDateTime.now())) {
+			if(urlMapping.getOriginalUrl() != null && urlMapping.getExpirationdDate().isAfter(LocalDate.now())) {
 				return ResponseEntity.status(HttpStatus.FOUND).location(URI.create(urlMapping.getOriginalUrl())).build();
 			}
 			

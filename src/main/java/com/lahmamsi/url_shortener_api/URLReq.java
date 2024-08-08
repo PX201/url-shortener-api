@@ -1,18 +1,18 @@
 package com.lahmamsi.url_shortener_api;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public class URLReq {
 
 	private String orgUrl;
 	private String customUrl;
-	private LocalDateTime expDate;
+	private LocalDate expDate;
 
 	public URLReq() {
 
 	}
 
-	public URLReq(String orgUrl, String customUrl, LocalDateTime expDate) {
+	public URLReq(String orgUrl, String customUrl, LocalDate expDate) {
 		this.orgUrl = orgUrl;
 		this.customUrl = customUrl;
 		this.expDate = expDate;
@@ -34,11 +34,11 @@ public class URLReq {
 		this.customUrl = customUrl;
 	}
 
-	public LocalDateTime getExpDate() {
+	public LocalDate getExpDate() {
 		return expDate;
 	}
 
-	public void setExpDate(LocalDateTime expDate) {
+	public void setExpDate(LocalDate expDate) {
 		this.expDate = expDate;
 	}
 
