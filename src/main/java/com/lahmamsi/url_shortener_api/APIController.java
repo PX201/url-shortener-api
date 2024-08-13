@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.util.Optional;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +28,7 @@ public class APIController {
 	APIService service;
 
 	@PostMapping("")
-	public ResponseEntity<URLMapping> shorten(@RequestBody URLReq urlreq, HttpServletRequest req) {
+	public ResponseEntity<URLMapping> shorten(@Valid @RequestBody URLReq urlreq, HttpServletRequest req) {
 		
 		URLMapping urlMapping = service.createUrl(urlreq);
 		

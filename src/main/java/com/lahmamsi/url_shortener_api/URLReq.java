@@ -2,9 +2,14 @@ package com.lahmamsi.url_shortener_api;
 
 import java.time.LocalDate;
 
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
 public class URLReq {
 
+	@NotNull
 	private String orgUrl;
+	@Size(max = 20, message = "The short link size can't be exceed 20 characher")
 	private String shortUrl;
 	private LocalDate expDate;
 
