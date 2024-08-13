@@ -42,6 +42,7 @@ public class APIController {
 		Optional<URLMapping> urlMappingOp = service.getURL(shortLink);
 		if(urlMappingOp.isPresent()) {
 			URLMapping urlMapping = urlMappingOp.get();
+			service.increaseClickCount(urlMapping);
 			if(urlMapping.getOriginUrl() != null && urlMapping.getExpirationdDate().isAfter(LocalDate.now())) {
 				return ResponseEntity.status(HttpStatus.FOUND).location(URI.create(urlMapping.getOriginUrl())).build();
 			}

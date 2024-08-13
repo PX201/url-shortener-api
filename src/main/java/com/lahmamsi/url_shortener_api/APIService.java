@@ -60,6 +60,12 @@ public class APIService {
 								.getBytes());
 	}
 
+	public void increaseClickCount(URLMapping urlMapping) {
+		urlMapping.setClickCount(urlMapping.getClickCount() + 1);
+		repo.save(urlMapping);
+		
+	}
+
 	
 
 }
