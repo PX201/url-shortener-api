@@ -22,7 +22,7 @@ public class URLMapping {
 
 	@Column
 	@NotNull
-	private String originalUrl;
+	private String originUrl;
 
 	@Column(unique = true)
 	private String shortUrl;
@@ -41,18 +41,18 @@ public class URLMapping {
 
 	}
 
-	public URLMapping(String originalUrl, String shortUrl, LocalDate createdAt, LocalDate expirationdDate) {
-		this.originalUrl = originalUrl;
+	public URLMapping(String originUrl, String shortUrl, LocalDate createdAt, LocalDate expirationdDate) {
+		this.originUrl = originUrl;
 		this.shortUrl = shortUrl;
 		this.createdAt = createdAt;
 		this.expirationdDate = expirationdDate;
 	}
 
-	public URLMapping(long id, String originalUrl, String shortUrl, LocalDate createdAt,
+	public URLMapping(long id, String originUrl, String shortUrl, LocalDate createdAt,
 			LocalDate expirationdDate, long clickCount) {
 		super();
 		this.id = id;
-		this.originalUrl = originalUrl;
+		this.originUrl = originUrl;
 		this.shortUrl = shortUrl;
 		this.createdAt = createdAt;
 		this.expirationdDate = expirationdDate;
@@ -67,12 +67,12 @@ public class URLMapping {
 		this.id = id;
 	}
 
-	public String getOriginalUrl() {
-		return originalUrl;
+	public String getOriginUrl() {
+		return originUrl;
 	}
 
-	public void setOriginalUrl(String originalUrl) {
-		this.originalUrl = originalUrl;
+	public void setOriginUrl(String originUrl) {
+		this.originUrl = originUrl;
 	}
 
 	public String getShortUrl() {

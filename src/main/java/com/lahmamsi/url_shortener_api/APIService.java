@@ -21,8 +21,8 @@ public class APIService {
 	public URLMapping createUrl(URLReq urlReq) {
 		if (urlReq.getExpDate() == null || urlReq.getExpDate().isBefore(LocalDate.now()))
 			urlReq.setExpDate(LocalDate.now().plusDays(1));
-		if (urlReq.getCustomUrl() == null || !isLinkExist(urlReq.getCustomUrl()))
-			urlReq.setCustomUrl(generateUrl(urlReq.getOrgUrl()));
+		if (urlReq.getShortUrl() == null || !isLinkExist(urlReq.getShortUrl()))
+			urlReq.setShortUrl(generateUrl(urlReq.getOrgUrl()));
 		return creatUrlMapping(urlReq);
 	}
 
@@ -32,12 +32,11 @@ public class APIService {
 
 	private URLMapping creatUrlMapping(URLReq urlReq) {
 
-		URLMapping urlMapping = new URLMapping(urlReq.getOrgUrl(), urlReq.getCustomUrl(), LocalDate.now(),
+		URLMapping urlMapping = new URLMapping(urlReq.getOrgUrl(), urlReq.getShortUrl(), LocalDate.now(),
 				urlReq.getExpDate());
 		return repo.save(urlMapping);
 	}
 
-	
 	private String generateUrl(String orgUrl) {
 		String shortLink = genereteHash(orgUrl);
 		int attemp = 0;
@@ -54,6 +53,8 @@ public class APIService {
 		String hash = DigestUtils.sha256Hex(orgLink);
 		return Base62.encode(hash.substring(0, 15).getBytes());
 	}
+
+	
 
 }
 

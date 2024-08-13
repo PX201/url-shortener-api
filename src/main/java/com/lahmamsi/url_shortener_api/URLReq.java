@@ -5,16 +5,16 @@ import java.time.LocalDate;
 public class URLReq {
 
 	private String orgUrl;
-	private String customUrl;
+	private String shortUrl;
 	private LocalDate expDate;
 
 	public URLReq() {
 
 	}
 
-	public URLReq(String orgUrl, String customUrl, LocalDate expDate) {
+	public URLReq(String orgUrl, String shortUrl, LocalDate expDate) {
 		this.orgUrl = orgUrl;
-		this.customUrl = customUrl;
+		this.shortUrl = shortUrl;
 		this.expDate = expDate;
 	}
 
@@ -26,12 +26,12 @@ public class URLReq {
 		this.orgUrl = orgUrl;
 	}
 
-	public String getCustomUrl() {
-		return customUrl;
+	public String getShortUrl() {
+		return shortUrl;
 	}
 
-	public void setCustomUrl(String customUrl) {
-		this.customUrl = customUrl;
+	public void setShortUrl(String shortUrl) {
+		this.shortUrl = shortUrl;
 	}
 
 	public LocalDate getExpDate() {

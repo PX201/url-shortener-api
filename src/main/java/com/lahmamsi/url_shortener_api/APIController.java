@@ -1,6 +1,8 @@
 package com.lahmamsi.url_shortener_api;
 
 import java.net.URI;
+
+
 import java.time.LocalDate;
 import java.util.Optional;
 
@@ -15,6 +17,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import static com.lahmamsi.url_shortener_api.URLUtills.addBaseUrlToShortenUrl;
+
 @Controller
 @RequestMapping("/")
 public class APIController {
@@ -27,7 +31,8 @@ public class APIController {
 		
 		URLMapping urlMapping = service.createUrl(urlreq);
 		
-		return ResponseEntity.status(HttpStatus.CREATED).body(urlMapping);
+		return ResponseEntity.status(HttpStatus.CREATED)
+								.body(addBaseUrlToShortenUrl(urlMapping, req));
 
 	}
 
@@ -36,8 +41,8 @@ public class APIController {
 		Optional<URLMapping> urlMappingOp = service.getURL(shortLink);
 		if(urlMappingOp.isPresent()) {
 			URLMapping urlMapping = urlMappingOp.get();
-			if(urlMapping.getOriginalUrl() != null && urlMapping.getExpirationdDate().isAfter(LocalDate.now())) {
-				return ResponseEntity.status(HttpStatus.FOUND).location(URI.create(urlMapping.getOriginalUrl())).build();
+			if(urlMapping.getOriginUrl() != null && urlMapping.getExpirationdDate().isAfter(LocalDate.now())) {
+				return ResponseEntity.status(HttpStatus.FOUND).location(URI.create(urlMapping.getOriginUrl())).build();
 			}
 			
 			return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("Link has been expired");
